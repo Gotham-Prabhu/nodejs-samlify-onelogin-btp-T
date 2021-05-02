@@ -1,0 +1,17 @@
+{
+  "name": "nodejs-cf-btp-t",
+  "version": "1.0.0",
+  "description": "node js app for btp cf",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gotham-prabhu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "@sap/xsenv": "^3.1.0",
+    "@sap/xssec": "^3.2.0",
+    "passport": "^0.4.1"
+  }
+}

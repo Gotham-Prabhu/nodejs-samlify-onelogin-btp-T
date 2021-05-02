@@ -1,0 +1,49 @@
+---
+applications:
+# Node App for testing
+- name: node-testing-cf
+  routes:
+    - route: node-testing-cf-boisterous-pangolin-fq.cfapps.eu10.hana.ondemand.com
+  path: node-testing-cf
+  memory: 128M
+  disk_quota: 128M
+  buildpacks:
+    - nodejs_buildpack  
+  timeout: 180
+  services:
+    - xsuaa-node-testing
+
+# Node App for Authentication
+- name: node-authenticate-cf
+  routes:
+    - route: node-authenticate-cf-boisterous-pangolin-fq.cfapps.eu10.hana.ondemand.com
+  path: node-authenticate-cf
+  memory: 128M
+  disk_quota: 128M
+  buildpacks:
+    - nodejs_buildpack  
+  timeout: 180
+  services:
+    - xsuaa-node-testing
+
+# Application Router
+- name: approuter
+  routes:
+    - route: approuter-node-testing-cf-boisterous-pangolin-fq.cfapps.eu10.hana.ondemand.com
+  path: approuter
+  buildpacks:
+    - nodejs_buildpack
+  memory: 128M
+  disk_quota: 256M
+  services:
+    - xsuaa-node-testing
+  env:
+    destinations: >
+      [
+        {"name":"node-testing-destination",
+         "url":"https://node-testing-cf-boisterous-pangolin-fq.cfapps.eu10.hana.ondemand.com",
+         "forwardAuthToken": true},
+        {"name":"node-authenticate-destination",
+         "url":"https://node-authenticate-cf-boisterous-pangolin-fq.cfapps.eu10.hana.ondemand.com",
+         "forwardAuthToken": false}
+      ]

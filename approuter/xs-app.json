@@ -1,0 +1,18 @@
+{
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/node-testing/(.*)$",
+      "target": "$1",
+      "destination": "node-testing-destination",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/node-authenticate/(.*)$",
+      "target": "$1",
+      "destination": "node-authenticate-destination",
+      "authenticationType": "none",
+      "csrfProtection": false
+    }
+  ]
+}
